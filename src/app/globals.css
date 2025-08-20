@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@tailwind utilities;
 
 :root {
   --background: #ffffff;
@@ -22,5 +23,423 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
+
+
+/* === ESTILOS PARA BOTONES ESPECÍFICOS (animaciones de Uiverse.io) === */
+/* Solo aplicar a botones con la clase .animated-button */
+button.animated-button {
+  padding: 10px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  border: 0;
+  background-color: white;
+  box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-size: 15px;
+  transition: all 0.5s ease;
+}
+
+button.animated-button:hover {
+  letter-spacing: 3px;
+  background-color: hsl(261deg 80% 48%);
+  color: hsl(0, 0%, 100%);
+  box-shadow: rgb(93 24 220) 0px 7px 29px 0px;
+}
+
+button.animated-button:active {
+  letter-spacing: 3px;
+  background-color: hsl(261deg 80% 48%);
+  color: hsl(0, 0%, 100%);
+  box-shadow: rgb(93 24 220) 0px 0px 0px 0px;
+  transform: translateY(10px);
+  transition: 100ms;
+}
+
+/* === ESTILOS PARA INPUTS CON ANIMACIÓN === */
+.form__group {
+  position: relative;
+  padding: 20px 0 0; /* espacio superior para el label */
+  width: 100%;
+  max-width: 100%;
+}
+
+.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.6);
+  outline: 0;
+  font-size: 17px; /* tamaño de letra fijo */
+  color: #ffffff;
+  padding: 10px 0 5px; /* suficiente padding para texto */
+  background: transparent !important;
+  transition: all 0.2s ease;
+}
+
+.form__field::placeholder {
+  color: transparent;
+}
+
+/* Label */
+.form__label {
+  position: absolute;
+  left: 0;
+  top: 15px; /* posición inicial */
+  font-size: 17px; /* tamaño fijo del label inicial */
+  color: #ffffff;
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+/* Label sube al focus o si el input tiene contenido */
+.form__field:focus ~ .form__label,
+.form__field:not(:placeholder-shown) ~ .form__label {
+  top: -5px; /* sube */
+  color: #38caef;
+  font-weight: 700;
+}
+
+/* Bordes del input al focus o si tiene contenido */
+.form__field:focus,
+.form__field:not(:placeholder-shown) {
+  border-bottom: 3px solid #38caef;
+  font-weight: 700;
+  padding-bottom: 5px;
+}
+
+/* Autofill fix */
+.form__field:-webkit-autofill,
+.form__field:-webkit-autofill:hover,
+.form__field:-webkit-autofill:focus,
+.form__field:-webkit-autofill:active,
+.form__field:-webkit-autofill:valid {
+  -webkit-box-shadow: 0 0 0 9999px transparent inset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background: transparent !important;
+  caret-color: #ffffff !important;
+}
+
+.form__field:-moz-autofill,
+.form__field:-moz-autofill-preview {
+  background: transparent !important;
+  color: #ffffff !important;
+}
+
+.form__field:autofill {
+  background: transparent !important;
+  color: #ffffff !important;
+}
+
+.form__field,
+.form__field:focus,
+.form__field:active,
+.form__field:valid,
+.form__field:invalid {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* === NOTIFICACIONES DE ERROR === */
+.notifications-container {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.error-alert {
+  display: none; /* 👈 oculto por defecto */
+  align-items: flex-start;
+  gap: 0.75rem;
+  border-radius: 0.375rem;
+  padding: 1rem;
+  background-color: rgb(254 242 242);
+  border: 1px solid rgb(248 113 113);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.4s ease, transform 0.3s ease;
+}
+
+.error-alert.show {
+  display: flex; /* 👈 se muestra cuando hay error */
+  opacity: 1;
+  transform: translateY(0);
+  animation: shakeFadeIn 0.5s ease forwards;
+}
+
+
+@keyframes shakeFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-15px) rotate(-2deg);
+  }
+  25% {
+    opacity: 1;
+    transform: translateY(0) rotate(2deg);
+  }
+  50% {
+    transform: translateY(0) rotate(-1deg);
+  }
+  75% {
+    transform: translateY(0) rotate(1deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+.error-svg {
+  color: #f87171;
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+}
+
+.error-prompt-heading {
+  color: #bd0f0f; /* negro */
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: bold;
+}
+
+.error-prompt-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1.25rem;
+}
+
+.error-prompt-wrap {
+  margin-top: 0.5rem;
+  color: #bd0f0f; 
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.error-prompt-list {
+  margin-top: 0.25rem;
+  color: #bd0f0f; 
+}
+
+/* FIN DE ANIMACIONES DE ERROR  */
+
+/* === ANIMACIONES === */
+.animate-fadeIn {
+  animation: fadeInSlide 0.3s ease-out;
+}
+
+.fadeOut {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 🚨 Nueva animación para errores */
+@keyframes shakeFade {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  25% {
+    transform: translateX(-5px);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-3px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* === ANIMACIONES === */
+.animate-fadeIn {
+  animation: fadeInSlide 0.3s ease-out;
+}
+
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === UTILIDADES === */
+.flex {
+  display: flex;
+}
+
+.flex-shrink-0 {
+  flex-shrink: 0;
+}
+
+/* animacion de botones */
+.gradient-animate {
+  background: linear-gradient(45deg, #667eea, #764ba2, #667eea);
+  background-size: 300% 300%;
+  animation: gradientMove 6s ease infinite;
+}
+
+.gradient-animate:hover {
+  animation-play-state: paused; /* 🔹 se pausa al hacer hover */
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@keyframes gradient-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-move {
+  animation: gradient-move 2s ease-in-out infinite;
+}
+@keyframes gradient-x {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-x {
+  background-size: 200% 200%;
+  animation: gradient-x 2s ease infinite;
+}
+/* styles/globals.css */
+:root {
+  --gradient-btn-primary: linear-gradient(90deg, #667eea, #764ba2);
+  --gradient-btn-primary-hover: linear-gradient(90deg, #764ba2, #667eea);
+  --shadow-purple: 0px 4px 15px rgba(118, 75, 162, 0.4);
+}
+
+.btn-gradient-primary {
+  background: var(--gradient-btn-primary);
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-gradient-primary:hover {
+  background: var(--gradient-btn-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-purple);
+}
+:root {
+  --gradient-btn-primary: linear-gradient(270deg, #667eea, #764ba2, #667eea);
+  --gradient-btn-primary-hover: linear-gradient(90deg, #764ba2, #667eea);
+  --shadow-purple: 0px 4px 15px rgba(118, 75, 162, 0.4);
+}
+
+.btn-gradient-primary {
+  background: var(--gradient-btn-primary);
+  background-size: 400% 400%;
+  animation: gradientMove 6s ease infinite;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-gradient-primary:hover {
+  background: var(--gradient-btn-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-purple);
+  animation: none; /* al hacer hover, se detiene la animación */
+}
+
+/* 🔹 Animación del gradiente */
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* fin de animacion de botones */
+
+  /* NOTIFICACIONES DE ÉXITO (CONFIRMACIÓN) */
+
+.success-alert {
+  padding: 1rem;
+  border-radius: 0.375rem;
+  background-color: rgb(240 253 244); 
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.4s ease, transform 0.3s ease;
+}
+
+.success-alert.show {
+  opacity: 1;
+  transform: translateY(0);
+  animation: fadeSlideIn 0.5s ease forwards;
+}
+
+@keyframes fadeSlideIn {
+  0%   { opacity: 0; transform: translateY(-15px); }
+  50%  { opacity: 0.6; transform: translateY(5px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.success-svg {
+  color: rgb(74 222 128); /* verde ícono */
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.success-prompt-heading {
+  font-weight: bold;
+  color: rgb(22 101 52);
+}
+
+.success-prompt-wrap {
+  margin-left: 0.75rem;
+  color: rgb(21 128 61);
+}
+/* FIN DE NOTIFICACIONES DE ÉXITO (CONFIRMACIÓN) */
