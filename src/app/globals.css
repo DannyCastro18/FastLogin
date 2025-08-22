@@ -26,7 +26,6 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
-
 /* === ESTILOS PARA BOTONES ESPECÍFICOS (animaciones de Uiverse.io) === */
 /* Solo aplicar a botones con la clase .animated-button */
 button.animated-button {
@@ -172,7 +171,6 @@ button.animated-button:active {
   animation: shakeFadeIn 0.5s ease forwards;
 }
 
-
 @keyframes shakeFadeIn {
   0% {
     opacity: 0;
@@ -215,14 +213,14 @@ button.animated-button:active {
 
 .error-prompt-wrap {
   margin-top: 0.5rem;
-  color: #bd0f0f; 
+  color: #bd0f0f;
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
 
 .error-prompt-list {
   margin-top: 0.25rem;
-  color: #bd0f0f; 
+  color: #bd0f0f;
 }
 
 /* FIN DE ANIMACIONES DE ERROR  */
@@ -237,7 +235,6 @@ button.animated-button:active {
   transform: translateY(-10px);
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
-
 
 @keyframes fadeInSlide {
   from {
@@ -401,45 +398,108 @@ button.animated-button:active {
 
 /* fin de animacion de botones */
 
-  /* NOTIFICACIONES DE ÉXITO (CONFIRMACIÓN) */
-
+/* === NOTIFICACIONES DE ÉXITO === */
 .success-alert {
-  padding: 1rem;
-  border-radius: 0.375rem;
-  background-color: rgb(240 253 244); 
-  display: flex;
+  display: none; /* 👈 oculto por defecto, igual que error-alert */
   align-items: flex-start;
   gap: 0.75rem;
+  border-radius: 0.375rem;
+  padding: 1rem;
+  background-color: rgb(240 253 244); /* verde claro */
+  border: 1px solid rgb(187 247 208); /* borde verde suave */
+  overflow: hidden;
   opacity: 0;
   transform: translateY(-10px);
   transition: opacity 0.4s ease, transform 0.3s ease;
 }
 
 .success-alert.show {
+  display: flex; /* 👈 se muestra cuando hay éxito */
   opacity: 1;
   transform: translateY(0);
-  animation: fadeSlideIn 0.5s ease forwards;
+  animation: successFadeIn 0.5s ease forwards;
 }
 
-@keyframes fadeSlideIn {
-  0%   { opacity: 0; transform: translateY(-15px); }
-  50%  { opacity: 0.6; transform: translateY(5px); }
-  100% { opacity: 1; transform: translateY(0); }
+.success-alert.fadeOut {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+@keyframes successFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-15px) scale(0.95);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translateY(2px) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .success-svg {
-  color: rgb(74 222 128); /* verde ícono */
+  color: rgb(34 197 94); /* verde intenso */
   width: 1.25rem;
   height: 1.25rem;
+  flex-shrink: 0;
+}
+
+.success-prompt-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1.25rem;
 }
 
 .success-prompt-heading {
   font-weight: bold;
-  color: rgb(22 101 52);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: rgb(22 101 52); /* verde más oscuro */
 }
 
 .success-prompt-wrap {
-  margin-left: 0.75rem;
+  margin-top: 0.5rem;
   color: rgb(21 128 61);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
-/* FIN DE NOTIFICACIONES DE ÉXITO (CONFIRMACIÓN) */
+
+.success-prompt-wrap p {
+  margin: 0;
+}
+  /* FIN DE ANIMACION DE MENSAJE DE EXITO */
+
+  /* === ESTILOS PARA BOTÓN DE MOSTRAR/OCULTAR CONTRASEÑA === */
+.password-toggle-btn {
+  position: absolute;
+  right: 12px; /* 👈 Cambié de 0 a 12px para separarlo del borde */
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  padding: 6px; /* 👈 Reduje el padding para que sea más compacto */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+  z-index: 10;
+}
+
+.password-toggle-btn:hover {
+  color: #38caef;
+}
+
+.password-toggle-btn:focus {
+  outline: none;
+  color: #38caef;
+}
+
+.form__group .relative .form__field {
+  padding-right: 50px; 
+}
