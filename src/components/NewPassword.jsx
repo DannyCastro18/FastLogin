@@ -20,7 +20,6 @@ const NewPassword = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const router = useRouter();
 
-  // 👉 Si aparece el success, ocultamos/cancelamos cualquier error activo
   useEffect(() => {
     if (showSuccess) {
       setErrors({});
@@ -72,7 +71,6 @@ const NewPassword = () => {
     const formErrors = validateForm();
 
     if (Object.keys(formErrors).length > 0) {
-      // Mostrar error y asegurar que el success no esté visible
       setErrors(formErrors);
       setShowErrors(true);
       setAnimateOut(false);
@@ -83,16 +81,13 @@ const NewPassword = () => {
 
     console.log("Contraseña actualizada exitosamente:", formData);
 
-    // Resetear errores por si hubiera alguno viejo
     setErrors({});
     setShowErrors(false);
     setAnimateOut(false);
 
-    // Mostrar notificación de éxito
     setShowSuccess(true);
     setAnimateOutSuccess(false);
 
-    // Ocultar la notificación después de 2s y redirigir
     setTimeout(() => {
       setAnimateOutSuccess(true);
       setTimeout(() => {
@@ -114,7 +109,6 @@ const NewPassword = () => {
 
   return (
     <div className="rounded-2xl p-6 lg:p-8 w-96 lg:w-[480px] xl:w-[520px]">
-      {/* Header */}
       <div className="text-center mb-8">
         <h1 className="text-3xl text-start font-semibold text-white mb-2">
           Nueva Contraseña
@@ -125,7 +119,6 @@ const NewPassword = () => {
         </p>
       </div>
 
-      {/* Formulario */}
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="form__group">
           <div className="relative">
@@ -179,7 +172,6 @@ const NewPassword = () => {
           </label>
         </div>
 
-        {/* Success notification */}
         {showSuccess && (
           <div className="notifications-container">
             <div className={`success-alert show ${animateOutSuccess ? "fadeOut" : ""}`}>
@@ -204,7 +196,6 @@ const NewPassword = () => {
           </div>
         )}
 
-        {/* Error notifications (gated por !showSuccess) */}
         {!showSuccess && showErrors && Object.keys(errors).length > 0 && (
           <div className="notifications-container">
             <div className={`error-alert ${showErrors ? "show" : ""} ${animateOut ? "fadeOut" : ""}`}>
@@ -248,7 +239,7 @@ const NewPassword = () => {
   );
 };
 
-// Iconos de ojo para mostrar/ocultar contraseña
+
 const EyeIcon = () => (
   <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
     <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />

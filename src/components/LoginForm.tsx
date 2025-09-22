@@ -231,7 +231,6 @@ const GoogleIcon = () => (
   </svg>
 );
 
-// Iconos de ojo para mostrar/ocultar contraseña
 const EyeIcon = () => (
   <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
     <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
