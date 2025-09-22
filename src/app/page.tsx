@@ -9,7 +9,7 @@ export default function HomePage() {
     <main className="flex justify-center items-center h-screen">
       <button
         onClick={() => router.push("/login")}
-        // onClick={() => router.push("/jugador/playerdata")}
+        // onClick={() => router.push("/jugador/playerdata")} // Ruta alternativa para probar el ingreso de datos - en construccion
         className="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-500 transition-colors"
       >
         Ir a Inicio de Sesión
